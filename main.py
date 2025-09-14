@@ -9,10 +9,10 @@ class PPLXSearchPlugin(Star):
         self.config = config
 
     @filter.command("pplx")
-    async def pplx_search(self, event: AstrMessageEvent):
+    async def pplx_search(self, event: AstrMessageEvent, *args, **kwargs):
         query = event.message_str.strip()
         if not query:
-            yield event.plain_result("请在指令后输入搜索内容，比如 /pplx 最新iPhone参数？")
+            yield event.plain_result("请在指令后输入搜索内容，比如 /pplx 最新iPhone的详细参数？")
             return
         api_key = self.config.get("api_key")
         if not api_key:
@@ -42,9 +42,9 @@ class PPLXSearchPlugin(Star):
             resp = requests.post(api_url, json=payload, headers=headers, timeout=15)
             resp.raise_for_status()
             data = resp.json()
-            # 主要内容
+            # 获取主内容
             content = data.get('choices', [{}])[0].get('message', {}).get('content', 'No content')
-            # 来源(本API返回search_results数组，每项含url等）
+            # 获取引用来源
             search_results = data.get('search_results', [])
             citation_txt = ""
             if len(search_results) > 0:
