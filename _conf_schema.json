@@ -1,0 +1,38 @@
+{
+  "api_key": {
+    "description": "Perplexity API密钥",
+    "type": "string",
+    "hint": "去 https://www.perplexity.ai/hub/blog/introducing-pplx-api 获取你的PPLX API Key",
+    "default": ""
+  },
+  "api_url": {
+    "description": "API地址",
+    "type": "string",
+    "hint": "如果官方有变可以修改，默认无需更改",
+    "default": "https://api.perplexity.ai/chat/completions"
+  },
+  "model": {
+    "description": "模型名称",
+    "type": "string",
+    "hint": "如 llama-3.1-sonar-small-128k-online（可查官方文档）",
+    "default": "llama-3.1-sonar-small-128k-online"
+  },
+  "max_tokens": {
+    "description": "回复最大Token数",
+    "type": "int",
+    "hint": "最大回复长度，默认4000",
+    "default": 4000
+  },
+  "temperature": {
+    "description": "采样温度",
+    "type": "float",
+    "hint": "数值0~2，越大答复越发散",
+    "default": 0.2
+  },
+  "top_p": {
+    "description": "top_p参数",
+    "type": "float",
+    "hint": "默认0.9，通常无需更改",
+    "default": 0.9
+  }
+}

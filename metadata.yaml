@@ -1,0 +1,6 @@
+name: astrbot_plugin_pplxsearch
+desc: 基于Perplexity AI的互联网搜索插件，群友可用/pplx 搜索命令
+help: 发送 /pplx [你的内容] 即可查互联网资料
+version: v1.0.0
+author: YourName
+repo: https://github.com/YourName/astrbot_plugin_pplxsearch
