@@ -2,7 +2,7 @@
   "api_key": {
     "description": "Perplexity API密钥",
     "type": "string",
-    "hint": "去 https://www.perplexity.ai/hub/blog/introducing-pplx-api 获取你的PPLX API Key",
+    "hint": "去 https://www.perplexity.ai 获取你的PPLX API Key",
     "default": ""
   },
   "api_url": {
@@ -14,8 +14,8 @@
   "model": {
     "description": "模型名称",
     "type": "string",
-    "hint": "如 llama-3.1-sonar-small-128k-online（可查官方文档）",
-    "default": "llama-3.1-sonar-small-128k-online"
+    "hint": "如 sonar、sonar-reasoning、sonar-deep-research",
+    "default": "sonar"
   },
   "max_tokens": {
     "description": "回复最大Token数",
