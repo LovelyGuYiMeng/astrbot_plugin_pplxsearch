@@ -34,5 +34,11 @@
     "type": "float",
     "hint": "默认0.9，通常无需更改",
     "default": 0.9
+  },
+  "show_citation": {
+    "description": "显示搜索来源",
+    "type": "bool",
+    "hint": "如需返回结果中显示网络来源请开启",
+    "default": true
   }
 }
