@@ -2,7 +2,7 @@ from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, register
 import requests
 
-@register("astrbot_plugin_pplxsearch", "YourName", "Perplexity AI 搜索插件", "1.0.0")
+@register("astrbot_plugin_pplxsearch", "LovelyGuYiMeng", "Perplexity AI 搜索插件", "1.0.0")
 class PPLXSearchPlugin(Star):
     def __init__(self, context: Context, config):
         super().__init__(context)
