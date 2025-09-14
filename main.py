@@ -3,6 +3,7 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
 
 import httpx
+import re
 
 @register("astrbot_plugin_pplxsearch", "LovelyGuYiMeng", "Perplexity AI 搜索插件", "1.0.0")
 class PPLXSearchPlugin(Star):
@@ -12,14 +13,14 @@ class PPLXSearchPlugin(Star):
 
     @filter.command("pplx")
     async def pplx_search(self, event: AstrMessageEvent):
-        query = event.message_str.strip()
+        query = re.sub(r'^/?pplx\s*', '', event.message_str, flags=re.IGNORECASE).strip()
         if not query:
             yield event.plain_result("请在指令后输入搜索内容，比如 /pplx 最新iPhone参数")
             return
 
         api_key = self.config.get("api_key")
         if not api_key:
-            yield event.plain_result("请先在插件设置页面填写 Perplexity API 密钥")
+            yield event.plain_result("请先在插件设置页面填写 Perplexity API密钥")
             return
 
         api_url = self.config.get("api_url")
@@ -27,12 +28,12 @@ class PPLXSearchPlugin(Star):
         max_tokens = self.config.get("max_tokens")
         temperature = self.config.get("temperature")
         top_p = self.config.get("top_p")
-        show_citation = self.config.get("show_citation", True)  # 新增参数
+        show_citation = self.config.get("show_citation", True)  # 新增配置项
 
         payload = {
             "model": model,
             "messages": [
-                {"role": "system", "content": "Be precise and concise."},
+                {"role": "system", "content": "你的回答简洁而精确。"},
                 {"role": "user", "content": query}
             ],
             "max_tokens": max_tokens,
