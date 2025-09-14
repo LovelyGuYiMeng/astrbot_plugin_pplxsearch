@@ -5,7 +5,7 @@ from astrbot.api import logger
 import httpx
 import re
 
-@register("astrbot_plugin_pplxsearch", "LovelyGuYiMeng", "Perplexity AI 搜索插件", "1.0.0")
+@register("astrbot_plugin_pplxsearch", "LovelyGuYiMeng", "Perplexity AI 搜索插件", "1.2.0")
 class PPLXSearchPlugin(Star):
     def __init__(self, context: Context, config):
         super().__init__(context)
@@ -20,7 +20,7 @@ class PPLXSearchPlugin(Star):
 
         api_key = self.config.get("api_key")
         if not api_key:
-            yield event.plain_result("请先在插件设置页面填写 Perplexity API密钥")
+            yield event.plain_result("请先在插件设置页面填写 Perplexity API 密钥")
             return
 
         api_url = self.config.get("api_url")
@@ -28,12 +28,12 @@ class PPLXSearchPlugin(Star):
         max_tokens = self.config.get("max_tokens")
         temperature = self.config.get("temperature")
         top_p = self.config.get("top_p")
-        show_citation = self.config.get("show_citation", True)  # 新增配置项
+        show_citation = self.config.get("show_citation", True)
 
         payload = {
             "model": model,
             "messages": [
-                {"role": "system", "content": "你的回答简洁而精确。"},
+                {"role": "system", "content": "Be precise and concise."},
                 {"role": "user", "content": query}
             ],
             "max_tokens": max_tokens,
