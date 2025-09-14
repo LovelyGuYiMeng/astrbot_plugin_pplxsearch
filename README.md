@@ -27,20 +27,20 @@ _✨ [astrbot](https://github.com/AstrBotDevs/AstrBot) Perplexity AI搜索插件
 
 ## ⚙️ 配置方式
 
-1. 前往 [Perplexity API](https://www.perplexity.ai/hub/blog/introducing-pplx-api) 申请你的 API Key
+1. 前往 [Perplexity API](https://www.perplexity.ai) 申请你的 API Key
 2. 在 AstrBot 控制台插件面板填写 API Key 及模型参数，可自定义 answers 风格和token长度
 
 | 配置项          | 说明                      |
 | --------------- | ------------------------- |
 | API密钥         | 必填，自行申请            |
 | API地址         | 默认无需更改              |
-| 模型名称        | llama-3.1-sonar-small-128k-online（更高配置请查官方文档） |
+| 模型名称        | sonar（其他模型请查官方文档） |
 | 最大Token数     | 默认4000，建议保持默认    |
 | 采样温度        | 默认0.2，越高越发散       |
 
 ## 📌 注意事项
 
-- 使用本插件需科学上网保证API可联通
+- 大陆使用本插件需魔法或代理中转保证API可联通
 - 如API接口调整，仅需在插件配置中更新模型与接口参数，无需修改代码
 - 合理使用API额度，避免滥用导致调用异常
 
@@ -60,8 +60,8 @@ _✨ [astrbot](https://github.com/AstrBotDevs/AstrBot) Perplexity AI搜索插件
 
 ## 🐔 联系作者
 
-- **GitHub**：[YourName 的 GitHub](https://github.com/YourName)
-- **反馈**：欢迎在 [GitHub Issues](https://github.com/YourName/astrbot_plugin_pplxsearch/issues) 提交问题或建议
+- **GitHub**：[LovelyGuYiMeng 的 GitHub](https://github.com/LovelyGuYiMeng)
+- **反馈**：欢迎在 [GitHub Issues](https://github.com/LovelyGuYiMeng/astrbot_plugin_pplxsearch/issues) 提交问题或建议
 
 ---
 
