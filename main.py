@@ -9,10 +9,10 @@ class PPLXSearchPlugin(Star):
         self.config = config
 
     @filter.command("pplx")
-    async def pplx_search(self, event: AstrMessageEvent, *args, **kwargs):
+    async def pplx_search(self, event: AstrMessageEvent):
         query = event.message_str.strip()
         if not query:
-            yield event.plain_result("请在指令后输入搜索内容，比如 /pplx 最新iPhone的详细参数？")
+            yield event.plain_result("请在指令后输入搜索内容，比如 /pplx 最新iPhone参数")
             return
         api_key = self.config.get("api_key")
         if not api_key:
@@ -23,16 +23,23 @@ class PPLXSearchPlugin(Star):
         max_tokens = self.config.get("max_tokens")
         temperature = self.config.get("temperature")
         top_p = self.config.get("top_p")
-
         payload = {
             "model": model,
             "messages": [
-                {"role": "system", "content": "Be precise and concise."},
+                {"role": "system", "content": "你的回答简洁而精确。"},
                 {"role": "user", "content": query}
             ],
             "max_tokens": max_tokens,
             "temperature": temperature,
             "top_p": top_p,
+            "search_domain_filter": ["perplexity.ai"],
+            "return_images": False,
+            "return_related_questions": False,
+            "search_recency_filter": "month",
+            "top_k": 0,
+            "stream": False,
+            "presence_penalty": 0,
+            "frequency_penalty": 1
         }
         headers = {
             "Authorization": f"Bearer {api_key}",
@@ -42,18 +49,11 @@ class PPLXSearchPlugin(Star):
             resp = requests.post(api_url, json=payload, headers=headers, timeout=15)
             resp.raise_for_status()
             data = resp.json()
-            # 获取主内容
             content = data.get('choices', [{}])[0].get('message', {}).get('content', 'No content')
-            # 获取引用来源
-            search_results = data.get('search_results', [])
-            citation_txt = ""
-            if len(search_results) > 0:
-                lines = []
-                for idx, item in enumerate(search_results):
-                    line = f"- [{item.get('title','来源')}]({item.get('url','')})"
-                    lines.append(line)
-                citation_txt = "## 搜索来源:\n" + "\n".join(lines) + "\n\n"
-            yield event.plain_result(f"{citation_txt}{content}")
+            citations = data.get('citations', [])
+            citation_txt = "\n".join(f"- [{i+1}] {url}" for i, url in enumerate(citations))
+            reply = f"## 搜索来源:\n{citation_txt}\n\n## 内容:\n{content}" if citations else content
+            yield event.plain_result(reply)
         except Exception as e:
             yield event.plain_result(f"请求PPLX接口异常：{e}")
 
